@@ -41,9 +41,9 @@ Options are available under **Esc → Options → AddOns → Only-Hero** (or via
 
 ## Dependencies
 
-This addon relies on the **Ace3** libraries. During development the libraries are loaded from your existing AddOns folder; for a standalone release you should embed them into `Libs/` when packaging (e.g. via the [WoW Addon packager](https://github.com/BigWigsMods/packager)).
+This addon relies on the **Ace3** libraries. During development the libraries are loaded from your existing AddOns folder; for releases they are automatically embedded into `Libs/` by the [BigWigs packager](https://github.com/BigWigsMods/packager) (via the `.pkgmeta` file), so no manual installation is needed.
 
-Required libraries:
+Required libraries (automatically embedded at build time):
 
 - LibStub
 - AceAddon-3.0
@@ -60,6 +60,15 @@ Required libraries:
 1. Download the latest release.
 2. Extract the `OnlyHero` folder into your `World of Warcraft/_retail_/Interface/AddOns/`.
 3. Restart WoW (or reload your UI with `/reload`) and enable the addon.
+
+## Building a release
+
+Releases are built automatically by a GitHub Actions workflow (`.github/workflows/package.yml`) whenever you push an **annotated tag** (e.g. `git tag -a v1.0.1 -m "v1.0.1"`). The workflow:
+- Embeds all Ace3 libraries into `Libs/` as configured in `.pkgmeta`.
+- Packages the addon as `OnlyHero-<version>.zip`.
+- Creates a GitHub Release with the packaged addon attached.
+
+Releases are uploaded to services whose API keys you have configured as GitHub repository secrets (`CF_API_KEY`, `WOWI_API_TOKEN`, `WAGO_API_TOKEN`). The `GITHUB_TOKEN` secret must be set to read-write permissions in your repository settings.
 
 ## Notes
 
