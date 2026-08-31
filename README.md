@@ -1,4 +1,4 @@
-# Only-Lust
+# Only-Hero
 
 A World of Warcraft addon that lets you know when you are the only member of your group who can cast a bloodlust effect (**Lust / Hero / Time Warp / Primal Rage / Fury of the Aspects**).
 
@@ -22,12 +22,12 @@ The addon is automatic — no setup required. When your group fills via group fi
 
 Manual commands:
 
-- `/onlylust` or `/lust` — run a check now
-- `/onlylust options` — open the options window
+- `/onlyhero` or `/lust` — run a check now
+- `/onlyhero options` — open the options window
 
 ## Configuration
 
-Options are available under **Esc → Options → AddOns → Only-Lust** (or via `/onlylust options`):
+Options are available under **Esc → Options → AddOns → Only-Hero** (or via `/onlyhero options`):
 
 | Option | Default | Description |
 | ------ | ------- | ----------- |
@@ -58,7 +58,7 @@ Required libraries:
 ## Installation
 
 1. Download the latest release.
-2. Extract the `OnlyLust` folder into your `World of Warcraft/_retail_/Interface/AddOns/`.
+2. Extract the `OnlyHero` folder into your `World of Warcraft/_retail_/Interface/AddOns/`.
 3. Restart WoW (or reload your UI with `/reload`) and enable the addon.
 
 ## Notes

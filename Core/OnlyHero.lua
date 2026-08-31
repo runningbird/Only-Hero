@@ -102,7 +102,7 @@ local function showPopup(bodyLines)
 	end
 
 	popup = AceGUI:Create("Window")
-	popup:SetTitle("Only-Lust")
+	popup:SetTitle("Only-Hero")
 	popup:SetStatusText("Bloodlust availability")
 	popup:SetLayout("Flow")
 	popup:SetWidth(380)
@@ -176,7 +176,7 @@ end
 
 local options = {
 	type = "group",
-	name = "Only-Lust",
+	name = "Only-Hero",
 	args = {
 		header = {
 			type = "header",
@@ -186,7 +186,7 @@ local options = {
 		enabled = {
 			type = "toggle",
 			name = "Enabled",
-			desc = "Enable the Only-Lust warning system.",
+			desc = "Enable the Only-Hero warning system.",
 			order = 2,
 		},
 		showPopup = {
@@ -241,11 +241,11 @@ local options = {
 }
 
 function addon:OnInitialize()
-	self.db = LibStub("AceDB-3.0"):New("OnlyLustDB", defaults, true)
+	self.db = LibStub("AceDB-3.0"):New("OnlyHeroDB", defaults, true)
 	LibStub("AceConfig-3.0"):RegisterOptionsTable(ADDON_NAME, options)
-	self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions(ADDON_NAME, "Only-Lust")
+	self.optionsFrame = LibStub("AceConfigDialog-3.0"):AddToBlizOptions(ADDON_NAME, "Only-Hero")
 
-	self:RegisterChatCommand("onlylust", function(input)
+	self:RegisterChatCommand("onlyhero", function(input)
 		if input and input:trim():lower() == "options" then
 			LibStub("AceConfigDialog-3.0"):Open(ADDON_NAME)
 		else

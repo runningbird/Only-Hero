@@ -1,9 +1,9 @@
 ## Interface: 110000
-## Title: Only-Lust
+## Title: Only-Hero
 ## Notes: Warns you when you are the only member of your LFG party who can cast a bloodlust effect (Lust/Hero/Time Warp/etc).
 ## Author: Runningbird
 ## Version: 1.0.0
-## SavedVariables: OnlyLustDB
+## SavedVariables: OnlyHeroDB
 ## X-Category: Raid
 
-Core/OnlyLust.lua
+Core/OnlyHero.lua
