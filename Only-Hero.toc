@@ -1,4 +1,5 @@
-## Interface: 110000
+## Interface: 120100, 120005, 120007
+## X-Min-Interface: 120001
 ## Title: Only-Hero
 ## Notes: Warns you when you are the only member of your LFG party who can cast a bloodlust effect (Lust/Hero/Time Warp/etc).
 ## Author: Runningbird
