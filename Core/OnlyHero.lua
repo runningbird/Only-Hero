@@ -25,7 +25,6 @@ local defaults = {
 		warnIfNone = false,
 		countHunters = true,
 		announceInRaid = false,
-		minLevel = 10,
 	},
 }
 
@@ -54,10 +53,6 @@ local function isLustClass(class)
 end
 
 local function unitCanLust(unit)
-	local level = UnitLevel(unit)
-	if level and level < addon.db.profile.minLevel then
-		return false
-	end
 	return isLustClass(select(2, UnitClass(unit)))
 end
 
@@ -132,11 +127,17 @@ local function formatClass(name, class)
 	return ("%s%s|r"):format(color, name)
 end
 
-local function evaluate()
+local function evaluate(verbose)
 	if not addon.db.profile.enabled then
+		if verbose then
+			addon:Print("Only-Hero is disabled.")
+		end
 		return
 	end
 	if not (IsInRaid() or IsInGroup()) then
+		if verbose then
+			addon:Print("You are not in a group or raid.")
+		end
 		return
 	end
 
@@ -162,6 +163,13 @@ local function evaluate()
 	end
 
 	if #bodyLines == 0 then
+		if verbose then
+			if count == 0 then
+				addon:Print("Nobody in the group can cast a bloodlust effect.")
+			else
+				addon:Print("Your group's bloodlust needs are covered.")
+			end
+		end
 		return
 	end
 
@@ -219,25 +227,22 @@ local options = {
 			desc = "Post the warning to raid chat instead of a popup.",
 			order = 7,
 		},
-		minLevel = {
-			type = "range",
-			name = "Min level",
-			desc = "Minimum group member level to be considered.",
-			min = 1,
-			max = 70,
-			step = 1,
-			order = 8,
-		},
 		check = {
 			type = "execute",
 			name = "Check now",
 			desc = "Manually run the bloodlust check.",
 			order = 9,
 			func = function()
-				evaluate()
+				evaluate(true)
 			end,
 		},
 	},
+	get = function(info)
+		return addon.db.profile[info[#info]]
+	end,
+	set = function(info, value)
+		addon.db.profile[info[#info]] = value
+	end,
 }
 
 function addon:OnInitialize()
@@ -249,11 +254,11 @@ function addon:OnInitialize()
 		if input and input:trim():lower() == "options" then
 			LibStub("AceConfigDialog-3.0"):Open(ADDON_NAME)
 		else
-			evaluate()
+			evaluate(true)
 		end
 	end)
 	self:RegisterChatCommand("lust", function()
-		evaluate()
+		evaluate(true)
 	end)
 end
 
